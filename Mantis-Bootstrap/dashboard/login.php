@@ -1,3 +1,56 @@
+<?php
+session_start();
+include("connection.php");
+
+if(isset($_POST['login']))
+{
+  $email = trim($_POST['email']);
+  $password = trim($_POST['Pswd']);
+  
+
+  $query = "SELECT Pswd FROM newdata WHERE email = ?";
+  $stmt = mysqli_prepare($conn, $query);
+    
+  mysqli_stmt_bind_param($stmt, "s", $email);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);     
+  //$row = mysqli_fetch_assoc($result);
+
+  //print_r($row);
+  if  ($row = mysqli_fetch_assoc($result))
+    {
+        $hashedpwd= $row['Pswd']; // Hashed password from DB
+        // echo "Entered Password: $password<br>";
+        // echo "Stored Hashed Password: $hashedpwd<br>";
+        // Verify password
+        // $verify = password_verify($password, $hashedpwd);
+        echo "Entered Password: " . $password . "<br>";
+        echo "Stored Hashed Password: " . $hashedpwd . "<br>";
+        echo "Length: " . strlen($hashedpwd) . "<br>";
+        if (password_verify($password, $hashedpwd))
+        {
+        //  echo "✅ Password matched!";
+
+            $_SESSION['username'] = $email;
+
+            header("Location: index.php");
+            exit();   
+        } 
+        else
+         {
+            echo "incorrect Password";
+            // exit();
+         }
+    } 
+    else
+     {
+        echo "<script>alert('No user found with this email!'); window.location.href='login.php';</script>";
+        echo "Query executed: " . $query . " with email: " . $email;
+        // exit();
+     }
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -55,26 +108,26 @@
               <h3 class="mb-0"><b>Login</b></h3>
               <a href="#" class="link-primary">Don't have an account?</a>
             </div>
+            <form action="" method="POST" autocomplete="off">
             <div class="form-group mb-3">
               <label class="form-label">Email Address</label>
-              <input type="email" class="form-control" placeholder="Email Address">
+              <input type="email" class="form-control" name="email" placeholder="Email Address">
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="password" class="form-control" placeholder="Password">
+              <input type="password" class="form-control" name="Pswd" placeholder="Password">
             </div>
             <div class="d-flex mt-1 justify-content-between">
               <div class="form-check">
                 <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="">
                 <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
               </div>
-             <a href="forgot.php" h5 class="link-primary">Forgot Password?</h5>
+             <a href="forgot.php"><h5 class="link-primary">Forgot Password?</h5></a>
             </div>
             <div class="d-grid mt-4">
-              <button type="button" class="btn btn-primary">Login</button>
+              <input type="submit" class="btn btn-primary" name="login"></button>
             </div>
-            
-         
+            </form>   
           </div>
         </div>
         <div class="auth-footer row">
@@ -132,3 +185,4 @@
 
 <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 06:40:54 GMT -->
 </html>
+

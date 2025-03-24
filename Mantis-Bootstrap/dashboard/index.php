@@ -1,7 +1,21 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+}
+
 include('connection.php');
 include('slidebar.php');
 include('header.php');
+
+$query = "SELECT * FROM newdata";
+
+$data = mysqli_query($conn,$query);
+
+$total = mysqli_num_rows($data);
+
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +86,10 @@ include('header.php');
           </div>
         </div>
 </div>
-
+<?php
+if($total != 0)
+{
+?>
       <table class="table table-bordered">
   <thead>
     <tr>
@@ -85,33 +102,48 @@ include('header.php');
       <th>Action</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>1234567890</td>
-      <td>@mdo</td>
-     <td><a href="update.php"><button class='button'> UPDATE </button></a>
-     <a href="delete.php"><button class='button2' onclick = 'return checkdate()'> DELETE </button></a>
-     
-    </td>
+   <?php
+    while($result = mysqli_fetch_assoc($data))
+    {
+      echo "<tr>
+                <td>".$result['ID']."</td>
+                <td>".$result['username']."</td>
+                <td>".$result['email']."</td>
+                <td>".$result['Pswd']."</td>
+                <td>".$result['confirm_pswd']."</td>
+                <td>".$result['phone_no']."</td>
 
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
+                <td> <a href='update.php?id=$result[ID]'>
+           <button class='button'> UPDATE </button></a> 
+
+            <a href='delete.php?id=$result[ID]'>
+             <button class='button2' onclick = 'return checkdate()'> DELETE </button></a> 
+        </td>
+      ";
+    }
+  }
+  else{
+    echo "there is no record";
+ } 
+   
+   ?>
 </table>
+
+<a href="logout.php">
+
+<input type="submit" value="Logout" name=""  style="background: blue; color: white; height:35px; width:100px; margin-top:20px;
+                font-size: 18px; border:0; border-radius:5px; cursor:pointer;">
+</a>
+
+<!-- echo $result['fname']." ".$result['lname']." ".$result['email']." ".$result['pswd']." ".$result['confirm_pswd']." ".$result['gender']." ".$result['ph_no']." ".$result['adress']."<br>";    -->
+<script>
+
+    function checkdate()
+    {
+        return confirm('Are Youy sure want to delete ?');
+    }
+</script>   
+
 
     </div>     <!-- [ PC-Content ] end -->
   </div>      <!-- [ PC-CONTAINER ] end -->
@@ -152,7 +184,7 @@ include('header.php');
   <script>font_change("Public-Sans");</script>
 
 <?php
-include('footer.php');
+//include('footer.php');
 
 ?>
   

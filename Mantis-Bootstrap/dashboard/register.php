@@ -1,3 +1,42 @@
+<?php
+session_start();
+include("connection.php");
+
+if(isset($_POST['Sign_in']))
+{
+ $username = $_POST['username'];
+ $email = $_POST['email'];
+ $Pswd = $_POST['Pswd'];
+ $confirm_pswd= $_POST['confirm_pswd'];
+ $phone_no = $_POST['phone_no'];
+
+ if (strlen($Pswd) < 5) {
+  die("Error: Password must be at least 5 characters long.");
+}
+if ($Pswd !== $confirm_pswd) {
+  die("Error: Passwords do not match.");
+
+}
+ $hashed_password = password_hash($Pswd, PASSWORD_BCRYPT);
+
+
+$query = "INSERT INTO newdata(username, email, Pswd, confirm_pswd,  phone_no)
+VALUES (?, ?, ?, ?, ?)";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $hashed_password, $confirm_pswd, $phone_no);
+
+
+if (mysqli_stmt_execute($stmt)) {
+    echo "Data inserted successfully!";
+    header('Location: login.php');
+} else {
+    die("Error: " . mysqli_error($conn));  // Show MySQL error
+}
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -33,7 +72,6 @@
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
-
 <body>
   <!-- [ Pre-loader ] start -->
   <div class="loader-bg">
@@ -49,6 +87,8 @@
         <div class="auth-header">
           <a href="#"><img src="https://themewagon.github.io/Mantis-Bootstrap/assets/images/logo-dark.svg" alt="img"></a>
         </div>
+
+        <form action="" method="POST" enctype="multipart/form-data">
         <div class="card my-5">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-end mb-4">
@@ -59,34 +99,34 @@
               <div class="col-md-">
                 <div class="form-group mb-3">
                   <label class="form-label">Username*</label>
-                  <input type="text" class="form-control" placeholder="First Name">
+                  <input type="text" class="form-control" name="username" placeholder="First Name">
                 </div>
               </div>
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Email</label>
-              <input type="email" class="form-control" placeholder="Email Address">
+              <input type="email" class="form-control" name="email" placeholder="Email Address">
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="password" class="form-control" placeholder="Password">
+              <input type="password" class="form-control" name="Pswd" placeholder="Password">
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Confirm Password</label>
-              <input type="password" class="form-control" placeholder="Password">
+              <input type="password" class="form-control" name="confirm_pswd" placeholder="Password">
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Phone No</label>
-              <input type="text" class="form-control" placeholder="Company">
+              <input type="text" class="form-control" name="phone_no" placeholder="Company">
             </div>
             <div class="d-grid mt-3">
-              <a href="login.php" button type="button" class="btn btn-primary">Create Account</button></a>
+              <input type="submit" class="btn btn-primary" name="Sign_in" value="Create Account"></button>
               
             </div>
             
           </div>
         </div>
-
+      </form>
       </div>
     </div>
   </div>
