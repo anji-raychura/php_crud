@@ -1,0 +1,13 @@
+button
+{
+    background-color: rgb(3, 118, 3) ;
+    border:none;
+    border-radius: 5px;
+    color:black;
+}
+.button2{
+    background-color: red;
+    border:none;
+    border-radius: 5px;
+    color:black;
+}
