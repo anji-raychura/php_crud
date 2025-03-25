@@ -24,9 +24,9 @@ if(isset($_POST['login']))
         // echo "Stored Hashed Password: $hashedpwd<br>";
         // Verify password
         // $verify = password_verify($password, $hashedpwd);
-        echo "Entered Password: " . $password . "<br>";
-        echo "Stored Hashed Password: " . $hashedpwd . "<br>";
-        echo "Length: " . strlen($hashedpwd) . "<br>";
+        // echo "Entered Password: " . $password . "<br>";
+        // echo "Stored Hashed Password: " . $hashedpwd . "<br>";
+        // echo "Length: " . strlen($hashedpwd) . "<br>";
         if (password_verify($password, $hashedpwd))
         {
         //  echo "✅ Password matched!";

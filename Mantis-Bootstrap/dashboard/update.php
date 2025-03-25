@@ -1,3 +1,27 @@
+<?php
+session_start();
+// error_reporting(0);
+include("connection.php");
+
+$ID = $_GET['id'];
+
+$userdata = $_SESSION['username'];
+if($userdata == TRUE)
+{
+ 
+}
+else
+{
+  header('location:login.php');
+}
+$query = "SELECT * FROM newdata WHERE ID='$ID'";
+$data = mysqli_query($conn,$query);
+
+// $total = mysqli_num_rows($data);
+$result = mysqli_fetch_assoc($data);
+ 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -60,9 +84,10 @@
             <!-- <div class="row"> -->
 
               <div class="col-md-12">
+              <form action="" method="POST" enctype="multipart/form-data">
                 <div class="form-group mb-3">
                   <label class="form-label">Username</label>
-                  <input type="text" class="form-control" >
+                  <input type="text" class="form-control" name="username" >
                 </div>
               </div>
             
@@ -74,7 +99,7 @@
             
             <div class="form-group mb-3">
               <label class="form-label">Email Address</label>
-              <input type="email" class="form-control">
+              <input type="email" class="form-control" name="email">
             </div>
             
             <!-- <div class="form-group mb-3">
@@ -92,14 +117,14 @@
               <div class="col-md-12">
                 <div class="form-group mb-3">
                   <label class="form-label">Phone Number</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" name="phone_no">
                 </div>
               </div>
             <!-- <p class="mt-4 text-sm text-muted">By Signing up, you agree to our <a href="#" class="text-primary"> Terms of Service </a> and <a href="#" class="text-primary"> Privacy Policy</a></p> -->
             <div class="d-grid mt-3">
-              <a href="index.php"><button type="button" class="btn btn-primary">UPDATE</button></a>
+              <a href="index.php"><button type="submit" class="btn btn-primary" value="update" name="update">UPDATE</button></a>
             </div>
-            
+    </form>
           </div>
         </div>
         <div class="auth-footer row">
@@ -324,9 +349,41 @@
           </div>     
         </li>
       </ul>
+      
     </div>
   </div>
 </div>
 </body>
 <!-- [Body] end -->
 </html>
+<?php
+if(isset($_POST['update']))
+{
+ $id = $_POST['ID'];
+ $username = $_POST['username'];
+ $email = $_POST['email'];
+ $phone_no = $_POST['phone_no'];
+
+ $query = "UPDATE newdata SET username='$username',email='$email',phone_no='$phone_no' WHERE ID='$ID'";
+ $data = mysqli_query($conn,$query);
+   
+ if(!$data)
+ {
+     echo "Failed update" . mysqli_error($conn);;    
+ }
+
+ else
+ {  
+
+      ?>
+     <!-- auto refresh..with  content second 3 second anmd directly display to link -->
+     <meta http-equiv = "refresh" content = "0; url =            
+        http://localhost:800/allfiles/Mantis-Bootstrap/Mantis-Bootstrap/dashboard/index.php"/>
+
+     <?php 
+
+     echo "Data Updated";
+ }
+}
+
+?>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -55,13 +58,16 @@
               <h3 class="mb-0"><b>Login</b></h3>
               
             </div>
+          <form method="POST" action="">
             <div class="form-group mb-3">
               <label class="form-label">Email Address</label>
-              <input type="email" class="form-control" placeholder="Email Address">
+              <input type="email" class="form-control" placeholder="Email Address" name="email">
             </div>
+           
             <div class="d-grid mt-4">
-              <button type="button" class="btn btn-primary">send</button>
+              <button type="submit" class="btn btn-primary" name="send">Send</button>
             </div><br>
+          </form>
             <a href="login.php" class="link-primary">Back</a>
             
          
@@ -122,3 +128,74 @@
 
 <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 06:40:54 GMT -->
 </html>
+
+<?php
+include("connection.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'vendor/autoload.php';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send'])) {
+  $email = $_POST['email'];
+
+  $forgot_query = "SELECT * FROM newdata WHERE  email = ?";
+  $stmt = mysqli_prepare($conn, $forgot_query);
+  mysqli_stmt_bind_param($stmt, "s", $email);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+
+
+  if($row = mysqli_fetch_assoc($result)) {
+    // Generate a unique token
+    $token = bin2hex(random_bytes(50));
+
+    // Store token in the database
+    $updateQuery = "UPDATE newdata SET reset_token=? WHERE email=?";  
+    $stmt = mysqli_prepare($conn, $updateQuery);
+    
+    if (!$stmt) {
+        die("Update query preparation failed: " . mysqli_error($conn));
+    }
+      
+   // $stmt = mysqli_prepare($conn, $updateQuery);
+    mysqli_stmt_bind_param($stmt, "ss", $token, $email);
+    mysqli_stmt_execute($stmt);
+
+    $reset_link = "http://localhost:800/allfiles/Mantis-Bootstrap/Mantis-Bootstrap/dashboard/reset.php?token=$token";
+
+    $mail = new PHPMailer(true);
+    try {
+        // Server settings
+        $mail->isSMTP();                                  
+        $mail->Host = 'smtp.gmail.com';  
+        $mail->SMTPAuth = true;                       
+        $mail->Username = 'anjaliraychura1@gmail.com';    
+        $mail->Password = 'xafmqbwezcbozhyq';      
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;                           
+
+        // Recipients
+        $mail->setFrom('anjaliraychura1@gmail.com', 'Admin');
+        $mail->addAddress($email);                  
+
+        // Content
+        $mail->isHTML(true);                         
+        $mail->Subject = 'Password Reset Request';
+        $mail->Body    = "Click the link below to reset your password: <a href='$reset_link'>$reset_link</a>";
+
+        // Send the email
+        $mail->send();
+        
+        header("Location: login.php");
+        exit;
+       } 
+       catch (Exception $e) {
+        echo "Failed to send email. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+else{
+  echo "email not found";
+}
+}
+?>
