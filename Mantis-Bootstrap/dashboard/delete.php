@@ -11,6 +11,7 @@ if($data)
 {
     echo "Deleted Succesfully";
 ?>
+
 <meta http-equiv = "refresh" content = "0; url =            
 http://localhost:800/allfiles/Mantis-Bootstrap/Mantis-Bootstrap/dashboard/index.php"/>
 
