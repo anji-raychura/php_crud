@@ -20,6 +20,29 @@ if ($Pswd !== $confirm_pswd) {
  $hashed_password = password_hash($Pswd, PASSWORD_BCRYPT);
 
 
+ $check_query = "SELECT * FROM newdata WHERE username = ? OR email = ?" ;
+ $stmt_check = mysqli_prepare($conn, $check_query);
+ mysqli_stmt_bind_param($stmt_check, "ss", $username, $email);
+ mysqli_stmt_execute($stmt_check);
+ $result = mysqli_stmt_get_result($stmt_check);
+
+ // If the username already exists, show an error message
+ if (mysqli_num_rows($result) > 0) {
+     die("Error: Username or Email already exists. Please choose a different one.");
+ }
+
+//  $check_email_query = "SELECT * FROM newdata WHERE email = ?";
+//  $smtp_check = mysqli_prepare($conn, $check_email_query);
+//  mysqli_stmt_bind_param($stmt_check, "s", $email);
+//  mysqli_stmt_execute($stmt_check);
+//  $result = mysqli_stmt_get_result($stmt_check);
+
+//  if (mysqli_num_rows($result) > 0) {
+//   die("Error: email already exists.");
+// }
+
+
+
 $query = "INSERT INTO newdata(username, email, Pswd, confirm_pswd,  phone_no)
 VALUES (?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($conn, $query);
@@ -89,31 +112,32 @@ if (mysqli_stmt_execute($stmt)) {
         </div>
 
         <form action="" method="POST" enctype="multipart/form-data">
-        <div class="card my-5">
+        <div class="card my-8">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-end mb-4">
-              <h3 class="mb-0"><b>Sign up</b></h3>
+              <h3 class="mb-5"><b>Sign up</b></h3><br>
+              
               <a href="login.php" class="link-primary">Already have an account?</a>
             </div>
             <div class="row">
               <div class="col-md-">
                 <div class="form-group mb-3">
                   <label class="form-label">Username*</label>
-                  <input type="text" class="form-control" name="username" placeholder="First Name">
+                  <input type="text" class="form-control" name="username" placeholder="First Name" required>
                 </div>
               </div>
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Email</label>
-              <input type="email" class="form-control" name="email" placeholder="Email Address">
+              <input type="email" class="form-control" name="email" placeholder="Email Address" required>
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="password" class="form-control" name="Pswd" placeholder="Password">
+              <input type="password" class="form-control" name="Pswd" placeholder="Password" required>
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Confirm Password</label>
-              <input type="password" class="form-control" name="confirm_pswd" placeholder="Password">
+              <input type="password" class="form-control" name="confirm_pswd" placeholder="Password" required>
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Phone No</label>

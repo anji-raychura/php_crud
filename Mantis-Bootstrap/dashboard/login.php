@@ -29,7 +29,7 @@ if(isset($_POST['login']))
         // echo "Length: " . strlen($hashedpwd) . "<br>";
         if (password_verify($password, $hashedpwd))
         {
-        //  echo "✅ Password matched!";
+        //  echo " Password matched!";
 
             $_SESSION['username'] = $email;
 
@@ -106,16 +106,16 @@ if(isset($_POST['login']))
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-end mb-4">
               <h3 class="mb-0"><b>Login</b></h3>
-              <a href="#" class="link-primary">Don't have an account?</a>
+              <a href="register.php" class="link-primary">Don't have an account?</a>
             </div>
             <form action="" method="POST" autocomplete="off">
             <div class="form-group mb-3">
               <label class="form-label">Email Address</label>
-              <input type="email" class="form-control" name="email" placeholder="Email Address">
+              <input type="email" class="form-control" name="email" placeholder="Email Address" required>
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="password" class="form-control" name="Pswd" placeholder="Password">
+              <input type="password" class="form-control" name="Pswd" placeholder="Password" required>
             </div>
             <div class="d-flex mt-1 justify-content-between">
               <div class="form-check">

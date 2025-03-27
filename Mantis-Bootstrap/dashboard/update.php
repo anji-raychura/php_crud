@@ -87,7 +87,7 @@ $result = mysqli_fetch_assoc($data);
               <form action="" method="POST" enctype="multipart/form-data">
                 <div class="form-group mb-3">
                   <label class="form-label">Username</label>
-                  <input type="text" class="form-control" name="username" >
+                  <input type="text" class="form-control" name="username" value=<?php echo $result['username']?>>
                 </div>
               </div>
             
@@ -99,7 +99,7 @@ $result = mysqli_fetch_assoc($data);
             
             <div class="form-group mb-3">
               <label class="form-label">Email Address</label>
-              <input type="email" class="form-control" name="email">
+              <input type="email" class="form-control" name="email" value=<?php echo $result['email']?>>
             </div>
             
             <!-- <div class="form-group mb-3">
@@ -117,7 +117,7 @@ $result = mysqli_fetch_assoc($data);
               <div class="col-md-12">
                 <div class="form-group mb-3">
                   <label class="form-label">Phone Number</label>
-                  <input type="text" class="form-control" name="phone_no">
+                  <input type="text" class="form-control" name="phone_no"  value=<?php echo $result['phone_no']?>>
                 </div>
               </div>
             <!-- <p class="mt-4 text-sm text-muted">By Signing up, you agree to our <a href="#" class="text-primary"> Terms of Service </a> and <a href="#" class="text-primary"> Privacy Policy</a></p> -->
@@ -329,9 +329,8 @@ $result = mysqli_fetch_assoc($data);
           <div class="collapse show" id="pctcustcollapse5">
             <div class="pct-content">
               <div class="theme-color fontpreset-color">
-                <a href="#!" class="active" onclick="font_change('Public-Sans')" data-value="Public-Sans"
-                  ><span>Aa</span><span>Public Sans</span></a
-                >
+                <a href="#!" class="active" onclick="font_change('Public-Sans')" data-value="Public-Sans"></a>
+                <span>Aa</span><span>Public Sans</span></a>
                 <a href="#!" class="" onclick="font_change('Roboto')" data-value="Roboto"><span>Aa</span><span>Roboto</span></a>
                 <a href="#!" class="" onclick="font_change('Poppins')" data-value="Poppins"><span>Aa</span><span>Poppins</span></a>
                 <a href="#!" class="" onclick="font_change('Inter')" data-value="Inter"><span>Aa</span><span>Inter</span></a>

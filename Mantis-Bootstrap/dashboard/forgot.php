@@ -133,7 +133,7 @@ else{
           <form method="POST" action="">
             <div class="form-group mb-3">
               <label class="form-label">Email Address</label>
-              <input type="email" class="form-control" placeholder="Email Address" name="email">
+              <input type="email" class="form-control" placeholder="Email Address" name="email" required>
             </div>
            
             <div class="d-grid mt-4">
