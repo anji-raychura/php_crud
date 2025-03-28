@@ -17,6 +17,9 @@ if ($Pswd !== $confirm_pswd) {
   die("Error: Passwords do not match.");
 
 }
+if(strlen($phone_no) <= 10){
+  die("Enter valid phone Number");
+}
  $hashed_password = password_hash($Pswd, PASSWORD_BCRYPT);
 
 
@@ -51,7 +54,7 @@ mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $hashed_password, $con
 
 if (mysqli_stmt_execute($stmt)) {
     echo "Data inserted successfully!";
-    header('Location: login.php');
+    header('Location: login.php');    
 } else {
     die("Error: " . mysqli_error($conn));  // Show MySQL error
 }
@@ -90,7 +93,7 @@ if (mysqli_stmt_execute($stmt)) {
 <link rel="stylesheet" href="../assets/fonts/material.css" >
 <!-- [Template CSS Files] -->
 <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link" >
-<link rel="stylesheet" href="../assets/css/style-preset.css" >
+<link rel="stylesheet" href="../assets/css/style-preset.css">
 
 </head>
 <!-- [Head] end -->
@@ -99,7 +102,7 @@ if (mysqli_stmt_execute($stmt)) {
   <!-- [ Pre-loader ] start -->
   <div class="loader-bg">
     <div class="loader-track">
-      <div class="loader-fill"></div>
+    <div class="loader-fill"></div>
     </div>
   </div>
   <!-- [ Pre-loader ] End -->
@@ -110,13 +113,11 @@ if (mysqli_stmt_execute($stmt)) {
         <div class="auth-header">
           <a href="#"><img src="https://themewagon.github.io/Mantis-Bootstrap/assets/images/logo-dark.svg" alt="img"></a>
         </div>
-
-        <form action="" method="POST" enctype="multipart/form-data">
+      <form action="" method="POST" enctype="multipart/form-data">
         <div class="card my-8">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-end mb-4">
               <h3 class="mb-5"><b>Sign up</b></h3><br>
-              
               <a href="login.php" class="link-primary">Already have an account?</a>
             </div>
             <div class="row">
@@ -145,10 +146,8 @@ if (mysqli_stmt_execute($stmt)) {
             </div>
             <div class="d-grid mt-3">
               <input type="submit" class="btn btn-primary" name="Sign_in" value="Create Account"></button>
-              
             </div>
-            
-          </div>
+            </div>
         </div>
       </form>
       </div>
