@@ -129,11 +129,6 @@ if($total != 0)
    ?>
 </table>
 
-<a href="logout.php">
-
-<input type="submit" value="Logout" name=""  style="background: blue; color: white; height:35px; width:100px; margin-top:20px;
-                font-size: 18px; border:0; border-radius:5px; cursor:pointer;">
-</a>
 
 <!-- echo $result['fname']." ".$result['lname']." ".$result['email']." ".$result['pswd']." ".$result['confirm_pswd']." ".$result['gender']." ".$result['ph_no']." ".$result['adress']."<br>";    -->
 <script>

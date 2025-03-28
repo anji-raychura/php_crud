@@ -17,9 +17,15 @@ if ($Pswd !== $confirm_pswd) {
   die("Error: Passwords do not match.");
 
 }
+
 if(strlen($phone_no) <= 10){
   die("Enter valid phone Number");
 }
+
+if (strlen($username) < 3) {
+  die("<p style='color:red;'>Username must be at least 3 characters long.</p>");
+}
+
  $hashed_password = password_hash($Pswd, PASSWORD_BCRYPT);
 
 
@@ -81,7 +87,7 @@ if (mysqli_stmt_execute($stmt)) {
   <meta name="author" content="CodedThemes">
 
   <!-- [Favicon] icon -->
-  <link rel="icon" href="https://themewagon.github.io/Mantis-Bootstrap/assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
+ <link rel="icon" href="https://themewagon.github.io/Mantis-Bootstrap/assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" id="main-font-link">
 <!-- [Tabler Icons] https://tablericons.com -->
 <link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css" >

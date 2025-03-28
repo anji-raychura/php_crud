@@ -18610,7 +18610,7 @@ pre[class*=language-] > code {
   padding: 20px;
   border-radius: 50px;
   display: inline-block;
-  float: right;
+  float : right;
 }
 .profit-bar .mon-icon svg {
   width: 25px;

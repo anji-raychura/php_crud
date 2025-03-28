@@ -118,10 +118,10 @@ if(isset($_POST['login']))
               <input type="password" class="form-control" name="Pswd" placeholder="Password" required>
             </div>
             <div class="d-flex mt-1 justify-content-between">
-              <div class="form-check">
+              <!-- <div class="form-check">
                 <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="">
                 <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
-              </div>
+              </div> -->
              <a href="forgot.php"><h5 class="link-primary">Forgot Password?</h5></a>
             </div>
             <div class="d-grid mt-4">
@@ -132,7 +132,7 @@ if(isset($_POST['login']))
         </div>
         <div class="auth-footer row">
           <!-- <div class=""> -->
-            <div class="col my-1">
+            <!-- <div class="col my-1">
               <p class="m-0">Copyright © <a href="#">Codedthemes</a> Distributed by <a href="https://themewagon.com/">ThemeWagon</a></p>
             </div>
             <div class="col-auto my-1">
@@ -141,7 +141,7 @@ if(isset($_POST['login']))
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
                 <li class="list-inline-item"><a href="#">Contact us</a></li>
               </ul>
-            </div>
+            </div> -->
           <!-- </div> -->
         </div>
       </div>
