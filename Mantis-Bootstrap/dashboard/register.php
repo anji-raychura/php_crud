@@ -18,7 +18,7 @@ if ($Pswd !== $confirm_pswd) {
 
 }
 
-if(strlen($phone_no) <= 10){
+if(strlen($phone_no) < 10){
   die("Enter valid phone Number");
 }
 
@@ -148,7 +148,7 @@ if (mysqli_stmt_execute($stmt)) {
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Phone No</label>
-              <input type="text" class="form-control" name="phone_no" placeholder="Company">
+              <input type="text" class="form-control" name="phone_no">
             </div>
             <div class="d-grid mt-3">
               <input type="submit" class="btn btn-primary" name="Sign_in" value="Create Account"></button>
@@ -156,6 +156,21 @@ if (mysqli_stmt_execute($stmt)) {
             </div>
         </div>
       </form>
+
+      <div class="auth-footer row">
+          <!-- <div class=""> -->
+            <div class="col my-1">
+              <p class="m-0">Copyright © <a href="#">Anjali</a> Distributed by <a href="https://themewagon.com/">ThemeWagon</a></p>
+            </div>
+            <div class="col-auto my-1">
+              <ul class="list-inline footer-link mb-0">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <!-- <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                <li class="list-inline-item"><a href="#">Contact us</a></li> -->
+              </ul>
+            </div>
+          <!-- </div> -->
+        </div>
       </div>
     </div>
   </div>

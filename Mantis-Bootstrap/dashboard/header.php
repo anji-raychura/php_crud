@@ -118,7 +118,7 @@
                   <h6 class="mb-1">Stebin Ben</h6>
                   <span>UI/UX Designer</span>
                 </div>
-                <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>
+                <!-- <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>  logout Button--> 
               </div>
             </div>
             <ul class="nav drp-tabs nav-fill nav-tabs" id="mydrpTab" role="tablist">
@@ -131,14 +131,7 @@
             </ul>
             <div class="tab-content" id="mysrpTabContent">
               <div class="tab-pane fade show active" id="drp-tab-1" role="tabpanel" aria-labelledby="drp-t1" tabindex="0">
-                <a href="register.php" class="dropdown-item">
-                  <i class="ti ti-edit-circle"></i>
-                  <span>Edit Profile</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ti ti-user"></i>
-                  <span>View Profile</span>
-                </a>
+                
                 <a href="logout.php" class="dropdown-item">
                   <i class="ti ti-power"></i>
                   <span>Logout</span>

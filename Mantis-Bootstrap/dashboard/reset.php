@@ -109,12 +109,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="email" class="form-control" placeholder="Email Address" name="Pswd">
+              <input type="password" class="form-control" name="Pswd">
             </div>
             
             <div class="form-group mb-3">
               <label class="form-label">Confirm Password</label>
-              <input type="text" class="form-control" placeholder="Password" name="confirm_pswd">
+              <input type="password" class="form-control" name="confirm_pswd">
             </div>
 
             <div class="d-grid mt-4">

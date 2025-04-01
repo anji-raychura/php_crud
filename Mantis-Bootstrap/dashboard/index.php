@@ -22,7 +22,7 @@ $total = mysqli_num_rows($data);
 <html lang="en">
   <!-- [Head] start -->
   
-  
+          
   <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/dashboard/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 18 Mar 2025 13:10:11 GMT -->
   <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
   <head>
@@ -102,6 +102,7 @@ if($total != 0)
       <th>Action</th>
     </tr>
   </thead>
+
    <?php
     while($result = mysqli_fetch_assoc($data))
     {
@@ -127,6 +128,7 @@ if($total != 0)
  } 
    
    ?>
+
 </table>
 
 
