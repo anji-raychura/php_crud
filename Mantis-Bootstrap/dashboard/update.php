@@ -87,7 +87,7 @@ $result = mysqli_fetch_assoc($data);
               <form action="" method="POST" enctype="multipart/form-data">
                 <div class="form-group mb-3">
                   <label class="form-label">Username</label>
-                  <input type="text" class="form-control" name="username" value=<?php echo $result['username']?>>
+                  <input type="text" class="form-control" name="username" value=<?php echo $result['username']?> required>
                 </div>
               </div>
             
@@ -99,7 +99,7 @@ $result = mysqli_fetch_assoc($data);
             
             <div class="form-group mb-3">
               <label class="form-label">Email Address</label>
-              <input type="email" class="form-control" name="email" value=<?php echo $result['email']?>>
+              <input type="email" class="form-control" name="email" value=<?php echo $result['email']?> required>
             </div>
             
             <!-- <div class="form-group mb-3">
@@ -117,7 +117,7 @@ $result = mysqli_fetch_assoc($data);
               <div class="col-md-12">
                 <div class="form-group mb-3">
                   <label class="form-label">Phone Number</label>
-                  <input type="text" class="form-control" name="phone_no"  value=<?php echo $result['phone_no']?>>
+                  <input type="text" class="form-control" name="phone_no"  value=<?php echo $result['phone_no']?> >
                 </div>
               </div>
             <!-- <p class="mt-4 text-sm text-muted">By Signing up, you agree to our <a href="#" class="text-primary"> Terms of Service </a> and <a href="#" class="text-primary"> Privacy Policy</a></p> -->
@@ -362,6 +362,14 @@ if(isset($_POST['update']))
  $username = $_POST['username'];
  $email = $_POST['email'];
  $phone_no = $_POST['phone_no'];
+
+ if (strlen($username) < 3) {
+  die("Username must be at least 3 characters long.</p>");
+}
+
+if (strlen($phone_no) != 10) {
+  die("Enter valid phone number");
+}
 
  $query = "UPDATE newdata SET username='$username',email='$email',phone_no='$phone_no' WHERE ID='$ID'";
  $data = mysqli_query($conn,$query);

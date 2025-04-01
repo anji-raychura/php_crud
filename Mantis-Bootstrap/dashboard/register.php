@@ -18,8 +18,8 @@ if ($Pswd !== $confirm_pswd) {
 
 }
 
-if(strlen($phone_no) < 10){
-  die("Enter valid phone Number");
+if (strlen($phone_no) != 10) {
+  die("Enter valid phone number");
 }
 
 if (strlen($username) < 3) {
@@ -77,7 +77,7 @@ if (mysqli_stmt_execute($stmt)) {
 <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/pages/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 07:03:16 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
-  <title>Sign up | Mantis Bootstrap 5 Admin Template</title>
+  <title>Sign up </title>
   <!-- [Meta] -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">

@@ -4,7 +4,7 @@
     <div class="m-header">
       <a href="" class="b-brand text-primary">
         <!-- ========   Change your logo from here   ============ -->
-        <img src="imagess/anj.jpg"  alt="logo"  style="width: 100px; margin-left: 50px; margin-top:80px; height: 100px; display: inline-block !important;">
+        <img src="imagess/img.jpg"  alt="logo"  style="width: 100px; margin-left: 50px; margin-top:80px; height: 100px; display: inline-block !important;">
         </a>
     </div>
     <div class="navbar-content">
@@ -51,7 +51,6 @@
           </a>
         </li>
       </ul>
-      
     </div>
   </div>
 </nav>
