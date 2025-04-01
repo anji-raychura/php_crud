@@ -29,15 +29,15 @@ if (strlen($username) < 3) {
  $hashed_password = password_hash($Pswd, PASSWORD_BCRYPT);
 
 
- $check_query = "SELECT * FROM newdata WHERE username = ? OR email = ?" ;
+ $check_query = "SELECT * FROM newdata WHERE username = ? OR email = ? OR phone_no = ?" ;
  $stmt_check = mysqli_prepare($conn, $check_query);
- mysqli_stmt_bind_param($stmt_check, "ss", $username, $email);
+ mysqli_stmt_bind_param($stmt_check, "sss", $username, $email, $phone_no);
  mysqli_stmt_execute($stmt_check);
  $result = mysqli_stmt_get_result($stmt_check);
 
  // If the username already exists, show an error message
  if (mysqli_num_rows($result) > 0) {
-     die("Error: Username or Email already exists. Please choose a different one.");
+     die("Error: Username or Email or phone number already exists. Please choose a different one.");
  }
 
 //  $check_email_query = "SELECT * FROM newdata WHERE email = ?";
@@ -52,7 +52,7 @@ if (strlen($username) < 3) {
 
 
 
-$query = "INSERT INTO newdata(username, email, Pswd, confirm_pswd,  phone_no)
+$query = "INSERT INTO newdata(username, email, Pswd, confirm_pswd, phone_no)
 VALUES (?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $hashed_password, $confirm_pswd, $phone_no);
@@ -130,7 +130,7 @@ if (mysqli_stmt_execute($stmt)) {
               <div class="col-md-">
                 <div class="form-group mb-3">
                   <label class="form-label">Username*</label>
-                  <input type="text" class="form-control" name="username" placeholder="First Name" required>
+                  <input type="text" class="form-control" name="username" placeholder="Username" required>
                 </div>
               </div>
             </div>
@@ -148,7 +148,7 @@ if (mysqli_stmt_execute($stmt)) {
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Phone No</label>
-              <input type="text" class="form-control" name="phone_no">
+              <input type="text" class="form-control" name="phone_no" placeholder="Mobile No">
             </div>
             <div class="d-grid mt-3">
               <input type="submit" class="btn btn-primary" name="Sign_in" value="Create Account"></button>
@@ -157,20 +157,7 @@ if (mysqli_stmt_execute($stmt)) {
         </div>
       </form>
 
-      <div class="auth-footer row">
-          <!-- <div class=""> -->
-            <div class="col my-1">
-              <p class="m-0">Copyright © <a href="#">Anjali</a> Distributed by <a href="https://themewagon.com/">ThemeWagon</a></p>
-            </div>
-            <div class="col-auto my-1">
-              <ul class="list-inline footer-link mb-0">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <!-- <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                <li class="list-inline-item"><a href="#">Contact us</a></li> -->
-              </ul>
-            </div>
-          <!-- </div> -->
-        </div>
+      
       </div>
     </div>
   </div>
