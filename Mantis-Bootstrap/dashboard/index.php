@@ -78,8 +78,8 @@ $total = mysqli_num_rows($data);
                 <h5 class="m-b-10">Home</h5>
               </div>
               <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="javascript: void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                 <li class="breadcrumb-item" aria-current="page">Home</li>
               </ul>
             </div>
@@ -140,8 +140,6 @@ if($total != 0)
         return confirm('Are Youy sure want to delete ?');
     }
 </script>   
-
-
     </div>     <!-- [ PC-Content ] end -->
   </div>      <!-- [ PC-CONTAINER ] end -->
   <!-- [ Main Content ] end -->

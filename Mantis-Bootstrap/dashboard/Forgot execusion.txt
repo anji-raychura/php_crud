@@ -1,0 +1,74 @@
+include("connection.php"); → Includes a database connection file to interact with the MySQL database.
+
+use PHPMailer\PHPMailer\PHPMailer; → Imports the PHPMailer class for sending emails.
+
+use PHPMailer\PHPMailer\Exception; → Imports the Exception class for handling errors related to PHPMailer.
+
+require 'vendor/autoload.php'; → Loads the necessary libraries from Composer (PHPMailer and its dependencies).
+
+
+
+---
+Checks if the form is submitted using the POST method and if the 'send' button is clicked.
+
+Retrieves the email entered by the user in the form.
+
+---
+Prepared Statement is used to prevent SQL Injection.
+
+Queries the database (newdata table) to check if the provided email exists.
+
+Executes the prepared statement and stores the result.
+
+---
+
+ the email exists, fetches the user data from the database.
+
+Generates a secure random token (random_bytes(50)) and converts it into a hexadecimal string.
+
+---
+
+Updates the reset_token column for the user’s email in the database.
+
+Prepared statement is used to prevent SQL Injection.
+
+If query preparation fails, it stops execution and prints an error.
+
+----
+
+Creates a PHPMailer object ($mail = new PHPMailer(true);).
+
+Configures SMTP settings:
+
+Uses Gmail’s SMTP server (smtp.gmail.com).
+
+Enables authentication ($mail->SMTPAuth = true).
+
+Provides the sender’s email and SMTP password ($mail->Username and $mail->Password).
+
+Uses STARTTLS encryption ($mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS).
+
+Uses port 587 (TLS port for Gmail).
+---
+
+sets the sender's email and name (setFrom).
+
+Adds the recipient’s email (addAddress).
+---
+pecifies that the email body contains HTML content.
+
+Sets the subject (Password Reset Request).
+
+Defines the email body, which includes the reset link.
+----
+
+Sends the email using $mail->send().
+
+If successful, redirects the user to login.php.
+
+---
+If email sending fails, catches the error and prints a message.
+
+---
+If the email does not exist in the database, it prints "email not found".
+
