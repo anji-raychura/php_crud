@@ -1,12 +1,12 @@
 button
 {
-    background-color: rgb(3, 118, 3) ;
+    background-color: rgba(36, 250, 168, 0.749) ;
     border:none;
     border-radius: 5px;
     color:black;
 }
 .button2{
-    background-color: red;
+    background-color: rgba(221, 79, 79, 0.845);
     border:none;
     border-radius: 5px;
     color:black;
