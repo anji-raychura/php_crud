@@ -9,6 +9,7 @@ if(isset($_POST['Sign_in']))
  $Pswd = $_POST['Pswd'];
  $confirm_pswd= $_POST['confirm_pswd'];
  $phone_no = $_POST['phone_no'];
+ $signup = $_POST['date'];
 
  if (strlen($Pswd) < 5) {
   die("Error: Password must be at least 5 characters long.");
@@ -52,10 +53,10 @@ if (strlen($username) < 3) {
 
 
 
-$query = "INSERT INTO newdata(username, email, Pswd, confirm_pswd, phone_no)
-VALUES (?, ?, ?, ?, ?)";
+$query = "INSERT INTO newdata(username, email, Pswd, confirm_pswd, phone_no, signup_date)
+VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $hashed_password, $confirm_pswd, $phone_no);
+mysqli_stmt_bind_param($stmt, "ssssss", $username, $email, $hashed_password, $confirm_pswd, $phone_no, $signup);
 
 
 if (mysqli_stmt_execute($stmt)) {
@@ -149,6 +150,10 @@ if (mysqli_stmt_execute($stmt)) {
             <div class="form-group mb-3">
               <label class="form-label">Phone No</label>
               <input type="text" class="form-control" name="phone_no" placeholder="Mobile No">
+            </div>
+            <div class="form-group mb-3">
+              <label class="form-label">Signup date </label>
+              <input type="date" class="form-control" name="date" placeholder="date" required>
             </div>
             <div class="d-grid mt-3">
               <input type="submit" class="btn btn-primary" name="Sign_in" value="Create Account"></button>

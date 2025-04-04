@@ -15,6 +15,7 @@ $query = "SELECT * FROM newdata";
 $data = mysqli_query($conn,$query);
 
 $total = mysqli_num_rows($data);
+// $result = mysqli_fetch_assoc($data)
 
 ?>
 
@@ -96,10 +97,11 @@ if($total != 0)
       <th>Id</th>
       <th>Username</th>
       <th>Email</th>
-      <th>password</th>
-      <th>Confirm password</th>
+      <!-- <th>password</th>
+      <th>Confirm password</th> -->
       <th>Phone No</th>
-      <th>Action</th>
+      <th>Registration Date</th>
+      <th>Action</th>    
     </tr>
   </thead>
 
@@ -110,16 +112,16 @@ if($total != 0)
                 <td>".$result['ID']."</td>
                 <td>".$result['username']."</td>
                 <td>".$result['email']."</td>
-                <td>".$result['Pswd']."</td>
-                <td>".$result['confirm_pswd']."</td>
                 <td>".$result['phone_no']."</td>
-
-                <td> <a href='update.php?id=$result[ID]'>
+                <td>".$result['signup_date']."</td>
+                
+           <td> <a href='update.php?id=$result[ID]'>
            <button class='button'> UPDATE </button></a> 
 
             <a href='delete.php?id=$result[ID]'>
              <button class='button2' onclick = 'return checkdate()'> DELETE </button></a> 
         </td>
+       
       ";
     }
   }
@@ -142,7 +144,7 @@ if($total != 0)
 </script>   
     </div>     <!-- [ PC-Content ] end -->
   </div>      <!-- [ PC-CONTAINER ] end -->
-  <!-- [ Main Content ] end -->
+  <!-- [ Main Content ] end -->                            
   
   
   <!-- [Page Specific JS] start -->
