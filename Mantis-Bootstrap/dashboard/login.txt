@@ -1,0 +1,105 @@
+PHP Login Logic (Top Section)
+php
+Copy
+Edit
+<?php
+session_start();
+Starts a session to track user login state (like keeping them logged in after authentication).
+
+php
+Copy
+Edit
+include("connection.php");
+Includes the database connection file. This gives access to the $conn variable used for queries.
+
+php
+Copy
+Edit
+if(isset($_POST['login']))
+Checks if the form was submitted with the login button.
+
+php
+Copy
+Edit
+$email = trim($_POST['email']);
+$password = trim($_POST['Pswd']);
+Retrieves the submitted email and password, removing extra spaces using trim().
+
+php
+Copy
+Edit
+$query = "SELECT username, Pswd FROM newdata WHERE email = ?";
+Prepares a query to safely fetch the user data based on the email. The ? is a placeholder for binding values.
+
+php
+Copy
+Edit
+$stmt = mysqli_prepare($conn, $query);
+Initializes a prepared statement to prevent SQL injection.
+
+php
+Copy
+Edit
+mysqli_stmt_bind_param($stmt, "s", $email);
+Binds the user-provided email to the query. "s" means it’s a string.
+
+php
+Copy
+Edit
+mysqli_stmt_execute($stmt);
+Executes the prepared statement.
+
+php
+Copy
+Edit
+$result = mysqli_stmt_get_result($stmt);
+Gets the result from the executed query.
+
+php
+Copy
+Edit
+if  ($row = mysqli_fetch_assoc($result))
+Fetches the result row as an associative array (like $row['Pswd']).
+
+php
+Copy
+Edit
+$hashedpwd = $row['Pswd'];
+Stores the hashed password from the database.
+
+php
+Copy
+Edit
+if (password_verify($password, $hashedpwd))
+Verifies if the submitted password matches the hashed one in the database using password_verify().
+
+php
+Copy
+Edit
+$_SESSION['username'] = $row['username'];
+$_SESSION['email'] = $email;
+Stores username and email in the session so the user stays logged in.
+
+php
+Copy
+Edit
+header("Location: index.php");
+exit();
+Redirects the user to the home page after successful login.
+
+❌ Incorrect Password or No User Found
+php
+Copy
+Edit
+else {
+    echo "incorrect Password";
+}
+If password verification fails, this shows an error.
+
+php
+Copy
+Edit
+else {
+    echo "<script>alert('No user found with this email!'); window.location.href='login.php';</script>";
+}
+If no user is found with the entered email, shows an alert and redirects back to login.

@@ -68,7 +68,7 @@ $total = mysqli_num_rows($data);
   <!-- [ Sidebar Menu ] end --> <!-- [ Header Topbar ] start -->
   <!-- [ Main Content ] start -->
   <div class="pc-container">
-    <div class="pc-content">
+    <div class="pc-content">     
       <!-- [ Main Content ] start -->
        
 <div class="page-header">

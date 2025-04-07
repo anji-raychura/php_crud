@@ -30,7 +30,8 @@
           <a href="https://themewagon.github.io/Mantis-Bootstrap/elements/bc_color.html" class="pc-link">
             <span class="pc-micon"><i class="ti ti-color-swatch"></i></span>
             <span class="pc-mtext">Color</span>
-          </a>
+          </a><zdeanh >
+            <a> Welcome $_SESSION['username']
         </li>
         <li class="pc-item">
           <a href="https://themewagon.github.io/Mantis-Bootstrap/elements/icon-tabler.html" class="pc-link">

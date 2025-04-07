@@ -8,7 +8,7 @@ if(isset($_POST['login']))
   $password = trim($_POST['Pswd']);
   
 
-  $query = "SELECT Pswd FROM newdata WHERE email = ?";
+  $query = "SELECT username, Pswd FROM newdata WHERE email = ?";
   $stmt = mysqli_prepare($conn, $query);
     
   mysqli_stmt_bind_param($stmt, "s", $email);
@@ -30,8 +30,8 @@ if(isset($_POST['login']))
         if (password_verify($password, $hashedpwd))
         {
         //  echo " Password matched!";
- 
-            $_SESSION['username'] = $email;
+        $_SESSION['username'] = $row['username'];
+            $_SESSION['email'] = $email;
 
             header("Location: index.php");
             exit();   

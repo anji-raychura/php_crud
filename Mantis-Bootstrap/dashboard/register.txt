@@ -1,0 +1,108 @@
+session_start();
+include("connection.php");
+session_start(): Starts a new session or resumes an existing one.
+
+include("connection.php"): Includes a separate file that likely contains the $conn database connection variable.
+
+🧾 Form Submission Handling
+php
+Copy
+Edit
+if(isset($_POST['Sign_in']))
+This checks if the form was submitted (Sign_in button clicked).
+
+📥 Collecting Form Data
+php
+Copy
+Edit
+$username = $_POST['username'];
+$email = $_POST['email'];
+$Pswd = $_POST['Pswd'];
+$confirm_pswd= $_POST['confirm_pswd'];
+$phone_no = $_POST['phone_no'];
+$signup = $_POST['date'];
+Grabs user input values from the form using the POST method.
+
+✅ Validation
+php
+Copy
+Edit
+if (strlen($Pswd) < 5) { die(...); }
+if ($Pswd !== $confirm_pswd) { die(...); }
+if (strlen($phone_no) != 10) { die(...); }
+if (strlen($username) < 3) { die(...); }
+Validates:
+
+Password length.
+
+Password confirmation.
+
+Phone number must be exactly 10 digits.
+
+Username must be at least 3 characters.
+
+🔐 Password Hashing
+php
+Copy
+Edit
+$hashed_password = password_hash($Pswd, PASSWORD_BCRYPT);
+Hashes the password securely using bcrypt before storing in the database.
+
+🔍 Duplicate Check
+php
+Copy
+Edit
+$check_query = "SELECT * FROM newdata WHERE username = ? OR email = ? OR phone_no = ?";
+Checks if the username, email, or phone number already exists to avoid duplicates.
+
+php
+Copy
+Edit
+$stmt_check = mysqli_prepare($conn, $check_query);
+mysqli_stmt_bind_param($stmt_check, "sss", $username, $email, $phone_no);
+Uses prepared statements to prevent SQL injection.
+
+🚫 If Duplicate Exists
+php
+Copy
+Edit
+if (mysqli_num_rows($result) > 0) {
+    die("Error: Username or Email or phone number already exists.");
+}
+Exits with error if any matching data is found.
+
+💾 Insert into Database
+php
+Copy
+Edit
+$query = "INSERT INTO newdata(username, email, Pswd, confirm_pswd, phone_no, signup_date) VALUES (?, ?, ?, ?, ?, ?)";
+Uses a prepared statement to securely insert user data into the newdata table.
+
+✅ Note: It's not recommended to store confirm_pswd in the database. You should remove that from the DB structure.
+
+🔄 Redirect or Show Error
+php
+Copy
+Edit
+if (mysqli_stmt_execute($stmt)) {
+    echo "Data inserted successfully!";
+    header('Location: login.php');
+} else {
+    die("Error: " . mysqli_error($conn));
+}
+If successful, user is redirected to login.php. Otherwise, it displays the database error.
+
+🧾 HTML Form
+The rest of the file is a styled HTML form using Bootstrap 5, with fields:
+
+Username
+
+Email
+
+Password / Confirm Password
+
+Phone number
+
+Signup date
+
+It uses a pre-built Bootstrap theme (Mantis) from ThemeWagon for UI styling.
