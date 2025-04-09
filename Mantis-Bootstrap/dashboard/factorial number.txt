@@ -1,0 +1,9 @@
+factorial number 
+
+prime NUmber 
+
+fibbonaciseries 
+
+Armstrong 
+
+palindrom number 

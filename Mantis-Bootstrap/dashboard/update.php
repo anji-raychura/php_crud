@@ -85,6 +85,15 @@ $result = mysqli_fetch_assoc($data);
 
               <div class="col-md-12">
               <form action="" method="POST" enctype="multipart/form-data">
+
+              <div class="form-group mb-3">
+                  <label class="form-label" style=" width: 100%;">image</label>
+                  <img src="<?php echo $result['image_source']; ?>" height="70" width="" alt="Current Image">
+                  <input type="file" class="form-control" name="uploadfile" style="width:100%;">
+                </div>
+
+
+
                 <div class="form-group mb-3">
                   <label class="form-label">Username</label>
                   <input type="text" class="form-control" name="username" value=<?php echo $result['username']?> required>
@@ -358,6 +367,18 @@ $result = mysqli_fetch_assoc($data);
 <?php
 if(isset($_POST['update']))
 {
+  if($_FILES["uploadfile"]["name"] != "") {
+    $filename = $_FILES["uploadfile"]["name"];
+    $tempname = $_FILES["uploadfile"]["tmp_name"];
+    $folder = "imagess/".$filename;
+
+    if (!move_uploaded_file($tempname, $folder)) {
+        die("File upload failed!");
+    }
+} else {
+    $folder = $result['image_source']; // keep the old image path if no new image selected
+}
+
  $id = $_POST['ID'];
  $username = $_POST['username'];
  $email = $_POST['email'];
@@ -371,7 +392,7 @@ if (strlen($phone_no) != 10) {
   die("Enter valid phone number");
 }
 
- $query = "UPDATE newdata SET username='$username',email='$email',phone_no='$phone_no' WHERE ID='$ID'";
+ $query = "UPDATE newdata SET image_source='$folder', username='$username',email='$email',phone_no='$phone_no' WHERE ID='$ID'";
  $data = mysqli_query($conn,$query);
    
  if(!$data)

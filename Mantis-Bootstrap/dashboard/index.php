@@ -95,6 +95,7 @@ if($total != 0)
   <thead>
     <tr>
       <th>Id</th>
+      <th>IMAGE</th>
       <th>Username</th>
       <th>Email</th>
       <!-- <th>password</th>
@@ -110,6 +111,7 @@ if($total != 0)
     {
       echo "<tr>
                 <td>".$result['ID']."</td>
+                <td><img src = '".$result['image_source']."' width='50px' height='50px'></td>
                 <td>".$result['username']."</td>
                 <td>".$result['email']."</td>
                 <td>".$result['phone_no']."</td>

@@ -57,14 +57,14 @@ Gets the result from the executed query.
 
 php
 Copy
-Edit
+Edit    
 if  ($row = mysqli_fetch_assoc($result))
 Fetches the result row as an associative array (like $row['Pswd']).
 
 php
 Copy
 Edit
-$hashedpwd = $row['Pswd'];
+$hashedpwd = $row['Pswd']; 
 Stores the hashed password from the database.
 
 php

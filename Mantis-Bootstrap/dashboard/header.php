@@ -1,3 +1,25 @@
+
+<?php
+include('connection.php');
+
+$userImage = 'logooo.jpg'; // fallback image
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+
+    $query = "SELECT image_source FROM newdata WHERE email = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        if (!empty($row['image_source'])) {
+            $userImage = $row['image_source'];
+        }
+    }
+}
+?>
+
 <header class="pc-header">
   <div class="header-wrapper">
     <div class="me-auto pc-mob-drp">
@@ -41,7 +63,7 @@
       <li class="dropdown pc-h-item">
           <?php
            if (isset($_SESSION['username'])) {
-                echo "<span> Welcome: ".$_SESSION['username']."</span>";}
+                echo "<span> Welcome  ".$_SESSION['username']."</span>";}
               else {
                 echo "<span>Guest</span>"; // Default text if the user is not logged in
                     } ?>
@@ -50,26 +72,25 @@
       
         <li class="dropdown pc-h-item header-user-profile">
           <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
-            <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
+          <img src="<?php echo $userImage; ?>" alt="user-image" class="user-avtar">
           
           </a>
           <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
             <div class="dropdown-header">
               <div class="d-flex mb-1">
                 <div class="flex-shrink-0">
-                  <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35">
+                <img src="<?php echo $userImage; ?>" alt="user-image" class="user-avtar wid-35">
+
                 </div>     
                 <div class="flex-grow-1 ms-3">
-                  <h6 class="mb-1"><?php if (isset($_SESSION['username']))
-                                          {
-                                            echo "<span>".$_SESSION['username']."</span>";
-                                          }
-                                          else
-                                            {
-                                              echo "<span> Guest </span>"; // Default text if the user is not logged in
-                                            }
-                                            ?></h6>
-                </div>
+                  <h6 class="mb-1"><?php
+                            if (isset($_SESSION['username'])) {
+                              echo "<span>" . $_SESSION['username'] . "</span>";
+                            } else {
+                              echo "<span>Guest</span>";
+                            }
+                          ?></h6>
+                  </div>
                 <!-- <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>  logout Button  -->
               </div>
             </div>

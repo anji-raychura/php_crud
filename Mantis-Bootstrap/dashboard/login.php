@@ -30,7 +30,7 @@ if(isset($_POST['login']))
         if (password_verify($password, $hashedpwd))
         {
         //  echo " Password matched!";
-        $_SESSION['username'] = $row['username'];
+            $_SESSION['username'] = $row['username'];
             $_SESSION['email'] = $email;
 
             header("Location: index.php");

@@ -9,7 +9,7 @@
     </div>
     <div class="navbar-content">
       <ul class="pc-navbar"><br><br><br>
-        <li class="pc-item">
+        <li class="pc-item">   <!-- start-->
           <a href="index.php" class="pc-link">
             <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
             <span class="pc-mtext">Dashboard</span>

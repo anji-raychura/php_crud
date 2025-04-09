@@ -148,10 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="../assets/js/pcoded.js"></script>
   <script src="../assets/js/plugins/feather.min.js"></script>
 
-  
-  
-  
-  
+   
   <script>layout_change('light');</script>
   
   

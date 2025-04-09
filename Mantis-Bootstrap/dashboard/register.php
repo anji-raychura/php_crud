@@ -4,6 +4,20 @@ include("connection.php");
 
 if(isset($_POST['Sign_in']))
 {
+  $allowed_extensions = ['jpg', 'jpeg', 'png'];
+$filename =  $_FILES["uploadfile"]["name"];
+$tempname =  $_FILES["uploadfile"]["tmp_name"];
+$file_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+if (in_array($file_ext, $allowed_extensions)) {
+    $folder = "imagess/" . $filename;
+    if (!move_uploaded_file($tempname, $folder)) {
+        die("File upload failed!");
+    }
+} else {
+    die("Only JPG, JPEG, and PNG files are allowed.<br>");
+}
+
  $username = $_POST['username'];
  $email = $_POST['email'];
  $Pswd = $_POST['Pswd'];
@@ -53,10 +67,10 @@ if (strlen($username) < 3) {
 
 
 
-$query = "INSERT INTO newdata(username, email, Pswd, confirm_pswd, phone_no, signup_date)
-VALUES (?, ?, ?, ?, ?, ?)";
+$query = "INSERT INTO newdata(image_source, username, email, Pswd, confirm_pswd, phone_no, signup_date)
+VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($stmt, "ssssss", $username, $email, $hashed_password, $confirm_pswd, $phone_no, $signup);
+mysqli_stmt_bind_param($stmt, "sssssss", $folder, $username, $email, $hashed_password, $confirm_pswd, $phone_no, $signup);
 
 
 if (mysqli_stmt_execute($stmt)) {
@@ -129,6 +143,14 @@ if (mysqli_stmt_execute($stmt)) {
             </div>
             <div class="row">
               <div class="col-md-">
+
+
+              <div class="form-group mb-3">
+                  <label class="form-label">image</label>
+                  <input type="file" class="form-control" name="uploadfile" style="width:100%;" required>
+                </div>
+
+
                 <div class="form-group mb-3">
                   <label class="form-label">Username*</label>
                   <input type="text" class="form-control" name="username" placeholder="Username" required>
