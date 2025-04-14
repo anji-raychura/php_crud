@@ -90,7 +90,7 @@ if (isset($_SESSION['email'])) {
                               echo "<span>Guest</span>";
                             }
                           ?></h6>
-                  </div>
+                </div>
                 <!-- <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>  logout Button  -->
               </div>
             </div>

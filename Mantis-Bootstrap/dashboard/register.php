@@ -2,6 +2,21 @@
 session_start();
 include("connection.php");
 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Verify CAPTCHA first
+  $recaptchaSecret = '6LeboBcrAAAAAPyGTrt-IqcL6JVwYdaaBZQc2pY6';
+  $recaptchaResponse = $_POST['g-recaptcha-response'];
+  $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$recaptchaResponse");
+  $responseKeys = json_decode($response, true);
+
+  if (!$responseKeys["success"]) {
+      die("CAPTCHA failed. Please try again.");
+  }
+
+
+
+
 if(isset($_POST['Sign_in']))
 {
   $allowed_extensions = ['jpg', 'jpeg', 'png'];
@@ -20,7 +35,7 @@ if (in_array($file_ext, $allowed_extensions)) {
 
  $username = $_POST['username'];
  $email = $_POST['email'];
- $Pswd = $_POST['Pswd'];
+ $Pswd = $_POST['Pswd'];       
  $confirm_pswd= $_POST['confirm_pswd'];
  $phone_no = $_POST['phone_no'];
  $signup = $_POST['date'];
@@ -80,8 +95,10 @@ if (mysqli_stmt_execute($stmt)) {
     die("Error: " . mysqli_error($conn));  // Show MySQL error
 }
 }
-
+}
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -102,7 +119,7 @@ if (mysqli_stmt_execute($stmt)) {
   <meta name="author" content="CodedThemes">
 
   <!-- [Favicon] icon -->
- <link rel="icon" href="https://themewagon.github.io/Mantis-Bootstrap/assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
+<link rel="icon" href="https://themewagon.github.io/Mantis-Bootstrap/assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" id="main-font-link">
 <!-- [Tabler Icons] https://tablericons.com -->
 <link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css" >
@@ -177,9 +194,17 @@ if (mysqli_stmt_execute($stmt)) {
               <label class="form-label">Signup date </label>
               <input type="date" class="form-control" name="date" placeholder="date" required>
             </div>
+
+            <div class="g-recaptcha" data-sitekey="6LeboBcrAAAAAFGY-5h3A5xNXzpECSAx_yXZJPwN" required>
+            </div>
+
+
             <div class="d-grid mt-3">
               <input type="submit" class="btn btn-primary" name="Sign_in" value="Create Account"></button>
             </div>
+
+            
+            <!-- <button type="submit">Submit</button> -->
             </div>
         </div>
       </form>
@@ -216,8 +241,9 @@ if (mysqli_stmt_execute($stmt)) {
   <script>preset_change("preset-1");</script>
   
   
-  <script>font_change("Public-Sans");</script>
   
+  <script>font_change("Public-Sans");</script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
  <div class="offcanvas pct-offcanvas offcanvas-end" tabindex="-1" id="offcanvas_pc_layout">
   <div class="offcanvas-header bg-primary">

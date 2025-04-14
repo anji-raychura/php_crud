@@ -2,9 +2,23 @@
 session_start();
 include("connection.php");
 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Verify CAPTCHA first
+  $recaptchaSecret = '6LeboBcrAAAAAPyGTrt-IqcL6JVwYdaaBZQc2pY6';
+  $recaptchaResponse = $_POST['g-recaptcha-response'];
+  $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$recaptchaResponse");
+  $responseKeys = json_decode($response, true);
+
+  if (!$responseKeys["success"]) {
+      die("CAPTCHA failed. Please try again.");
+  }
+
+
+
 if(isset($_POST['login']))
 {
-  $email = trim($_POST['email']);
+  $email = trim($_POST['email']);    
   $password = trim($_POST['Pswd']);
   
 
@@ -18,7 +32,7 @@ if(isset($_POST['login']))
 
   //print_r($row);
   if  ($row = mysqli_fetch_assoc($result))
-    {
+    {      
         $hashedpwd= $row['Pswd']; // Hashed password from DB
         // echo "Entered Password: $password<br>";
         // echo "Stored Hashed Password: $hashedpwd<br>";
@@ -48,6 +62,8 @@ if(isset($_POST['login']))
         echo "Query executed: " . $query . " with email: " . $email;
         // exit();
      }
+
+}
 
 }
 ?>
@@ -117,6 +133,10 @@ if(isset($_POST['login']))
               <label class="form-label">Password</label>
               <input type="password" class="form-control" name="Pswd" placeholder="Password" required>
             </div>
+
+            <div class="g-recaptcha" data-sitekey="6LeboBcrAAAAAFGY-5h3A5xNXzpECSAx_yXZJPwN" required>
+            </div>
+
             <div class="d-flex mt-1 justify-content-between">
               <!-- <div class="form-check">
                 <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="">
@@ -176,7 +196,7 @@ if(isset($_POST['login']))
   
   
   <script>font_change("Public-Sans");</script>
-  
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
  
 </body>
