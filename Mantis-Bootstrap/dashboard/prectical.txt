@@ -1,0 +1,361 @@
+
+
+
+
+
+
+
+==================================factorial============================================================
+#include<stdio.h>
+    // #include<conio.h>
+int factorial(int n){
+    if(n == 1 || n==0){
+        return 1;
+    }else {
+        return n * factorial(n-1);
+    }
+}
+int main()
+{
+int num;
+printf("Enter a number");
+scanf("%d", &num);
+
+int result = factorial(num);
+printf("Factorial of %d is %d\n", num, result);
+return 0;
+}
+
+==================================febonacci============================================================
+#include<stdio.h>
+
+int fibonacci(int n) {
+    if (n == 0)
+        return 0;
+    else if (n == 1)
+        return 1;
+    else
+        return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    int i, terms;
+
+    printf("Enter the number of terms: ");
+    scanf("%d", &terms);
+
+    printf("Fibonacci Series: ");
+    for (i = 0; i < terms; i++) {
+        printf("%d ", fibonacci(i));
+    }
+
+    return 0;
+}
+==================================user define with no argu no return============================================================
+
+
+#include <stdio.h>
+
+// User-defined function with no arguments and no return value
+void displayMessage() {
+    printf("Hello! This is a user-defined function.\n");
+}
+
+int main() {
+    displayMessage();  // Function call
+    return 0;
+}
+Output:
+pgsql
+Copy
+Edit
+Hello! This is a user-defined function.
+
+==================================user define with with argu no return============================================================
+
+#include <stdio.h>
+
+// Function declaration
+void printSum(int a, int b);
+
+int main() {
+    printSum(10, 20);  // Call with arguments
+    return 0;
+}
+
+// Function definition
+void printSum(int a, int b) {
+    printf("Sum is: %d\n", a + b);
+}
+==================================user define with no argu with return============================================================
+
+
+include <stdio.h>
+
+// Function declaration
+int getNumber();
+
+int main() {
+    int num;
+    num = getNumber();  // Function returns a value
+    printf("The number is: %d\n", num);
+    return 0;
+}
+
+// Function definition
+int getNumber() {
+    return 42;  // Returning a value with no arguments
+}
+
+==================================user define with with argu with return============================================================
+
+#include <stdio.h>
+
+// Function declaration
+int multiply(int x, int y);
+
+int main() {
+    int m = 6, n = 7;
+    int product = multiply(m, n);
+    printf("Product is: %d\n", product);
+    return 0;
+}
+
+// Function definition
+int multiply(int x, int y) {
+    return x * y;
+}
+
+==================================user define with with argu with return============================================================
+
+
+#include <stdio.h>
+
+void main() {
+    int num, row, column, space;
+
+    printf("Enter Any Number: ");
+    scanf("%d", &num);
+
+    for (row = 1; row <= num; row++) {
+        // Print spaces
+        for (space = 1; space <= num - row; space++) {
+            printf(" ");
+        }
+
+        // Print stars with space
+        for (column = 1; column <= row; column++) {
+            printf("* ");
+        }
+
+        // Move to next line
+        printf("\n");
+    }
+}
+🟢 Sample Output (when num = 5):
+markdown
+Copy
+Edit
+    * 
+   * * 
+  * * * 
+ * * * * 
+* * * * *
+==================================user define with with argu with return============================================================
+
+
+#include <stdio.h>
+
+int main() {
+    int num, i, isPrime = 1;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    // Prime check for numbers greater than 1
+    if (num <= 1) {
+        isPrime = 0;
+    } else {
+        for (i = 2; i <= num / 2; i++) {
+            if (num % i == 0) {
+                isPrime = 0;
+                break;
+            }
+        }
+    }
+
+    if (isPrime)
+        printf("%d is a Prime Number.\n", num);
+    else
+        printf("%d is Not a Prime Number.\n", num);
+
+    return 0;
+}
+🟢 Example Output:
+mathematica
+Copy
+Edit
+Enter a number: 7
+7 is a Prime Number. 
+
+==================================prime============================================================
+
+
+
+#include <stdio.h>
+
+int main() {
+    int num, i, isPrime = 1;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    // Check if number is less than or equal to 1
+    if (num <= 1) {
+        isPrime = 0;
+    } else {
+        for (i = 2; i < num; i++) {
+            if (num % i == 0) {
+                isPrime = 0;
+                break;
+            }
+        }
+    }
+
+    // Output result
+    if (isPrime)
+        printf("%d is a Prime Number.\n", num);
+    else
+        printf("%d is Not a Prime Number.\n", num);
+
+    return 0;
+}
+🟢 Sample Output:
+mathematica
+Copy
+Edit
+Enter a number: 11
+11 is a Prime Number.
+mathematica
+Copy
+Edit
+Enter a number: 9
+9 is Not a Prime Number.
+
+
+==================================stack============================================================
+
+
+#include <stdio.h>
+#define SIZE 5
+
+int stack[SIZE], top = -1;
+
+void push(int value) {
+    if (top == SIZE - 1)
+        printf("Stack Overflow\n");
+    else
+        stack[++top] = value;
+}
+
+void pop() {
+    if (top == -1)
+        printf("Stack Underflow\n");
+    else
+        printf("Popped: %d\n", stack[top--]);
+}
+
+void display() {
+    if (top == -1)
+        printf("Stack is empty\n");
+    else {
+        for (int i = top; i >= 0; i--)
+            printf("%d ", stack[i]);
+        printf("\n");
+    }
+}
+
+
+==================================queue============================================================
+
+✅ QUEUE (FIFO: First In, First Out)
+You add from the rear and remove from the front.
+
+Think of a line of people — first one in is served first.
+
+🔸 Basic Operations:
+enqueue() → Add element
+
+dequeue() → Remove element
+
+display() → Show queue
+
+🔹 Example:
+c
+Copy
+Edit
+#include <stdio.h>
+#define SIZE 5
+
+int queue[SIZE], front = -1, rear = -1;
+
+void enqueue(int value) {
+    if (rear == SIZE - 1)
+        printf("Queue Overflow\n");
+    else {
+        if (front == -1) front = 0;
+        queue[++rear] = value;
+    }
+}
+
+void dequeue() {
+    if (front == -1 || front > rear)
+        printf("Queue Underflow\n");
+    else
+        printf("Dequeued: %d\n", queue[front++]);
+}
+
+void display() {
+    if (front == -1 || front > rear)
+        printf("Queue is empty\n");
+    else {
+        for (int i = front; i <= rear; i++)
+            printf("%d ", queue[i]);
+        printf("\n");
+    }
+}
+-------------------------------------------------html----------------------------------------------
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Table Example</title>
+</head>
+<body>
+
+    <table border="1">
+        <tr>
+            <th>Value 1</th>
+            <th>Value 2</th>
+            <th>Value 3</th>
+            <th>Value 4</th>
+            <th>Value 5</th>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>20</td>
+            <td>30</td>
+            <td>40</td>
+            <td>50</td>
+        </tr>
+    </table>
+
+</body>
+</html>
+🟢 Table Output:
+
+Value 1	Value 2	Value 3	Value 4	Value 5
+10	20	30	40	50

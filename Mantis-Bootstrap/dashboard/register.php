@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
+
 if(isset($_POST['Sign_in']))
 {
   $allowed_extensions = ['jpg', 'jpeg', 'png'];
@@ -158,7 +159,7 @@ if (mysqli_stmt_execute($stmt)) {
               <h3 class="mb-5"><b>Sign up</b></h3><br>
               <a href="login.php" class="link-primary">Already have an account?</a>
             </div>
-            <div class="row">
+            <div class="row">            
               <div class="col-md-">
 
 
@@ -175,23 +176,23 @@ if (mysqli_stmt_execute($stmt)) {
               </div>
             </div>
             <div class="form-group mb-3">
-              <label class="form-label">Email</label>
+              <label class="form-label">Email*</label>
               <input type="email" class="form-control" name="email" placeholder="Email Address" required>
             </div>
             <div class="form-group mb-3">
-              <label class="form-label">Password</label>
+              <label class="form-label">Password*</label>
               <input type="password" class="form-control" name="Pswd" placeholder="Password" required>
-            </div>
+            </div> 
             <div class="form-group mb-3">
-              <label class="form-label">Confirm Password</label>
+              <label class="form-label">Confirm Password*</label>
               <input type="password" class="form-control" name="confirm_pswd" placeholder="Password" required>
             </div>
             <div class="form-group mb-3">
-              <label class="form-label">Phone No</label>
+              <label class="form-label">Phone No*</label>
               <input type="text" class="form-control" name="phone_no" placeholder="Mobile No">
             </div>
             <div class="form-group mb-3">
-              <label class="form-label">Signup date </label>
+              <label class="form-label">Signup date</label>
               <input type="date" class="form-control" name="date" placeholder="date" required>
             </div>
 
@@ -239,7 +240,6 @@ if (mysqli_stmt_execute($stmt)) {
   
   
   <script>preset_change("preset-1");</script>
-  
   
   
   <script>font_change("Public-Sans");</script>
@@ -315,9 +315,9 @@ if (mysqli_stmt_execute($stmt)) {
                 <div class="avtar avtar-xs bg-light-primary">
                   <i class="ti ti-color-swatch f-18"></i>
                 </div>
-              </div>
+              </div>        
               <div class="flex-grow-1 ms-3">
-                <h6 class="mb-1">Color Scheme</h6>
+                <h6 class="mb-1">Color Sche          v      me</h6>
                 <span>Choose your primary theme color</span>
               </div>
               <i class="ti ti-chevron-down"></i>
@@ -423,7 +423,7 @@ if (mysqli_stmt_execute($stmt)) {
   </div>
 </div>
 </body>
-<!-- [Body] end -->
+<!-- [Body] end -->>
 
 
 <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/pages/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 07:03:19 GMT -->

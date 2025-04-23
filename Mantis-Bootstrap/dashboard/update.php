@@ -2,7 +2,7 @@
 session_start();
 // error_reporting(0);
 include("connection.php");
-
+ 
 $ID = $_GET['id'];
 
 $userdata = $_SESSION['username'];
@@ -37,7 +37,7 @@ $result = mysqli_fetch_assoc($data);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Mantis is made using Bootstrap 5 design framework. Download the free admin template & use it for your project.">
   <meta name="keywords" content="Mantis, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template">
-  <meta name="author" content="CodedThemes">
+  <meta name="author" content="CodedThemes">    
 
   <!-- [Favicon] icon -->
   <link rel="icon" href="https://themewagon.github.io/Mantis-Bootstrap/assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
@@ -91,9 +91,7 @@ $result = mysqli_fetch_assoc($data);
                   <img src="<?php echo $result['image_source']; ?>" height="70" width="" alt="Current Image">
                   <input type="file" class="form-control" name="uploadfile" style="width:100%;">
                 </div>
-
-
-
+                
                 <div class="form-group mb-3">
                   <label class="form-label">Username</label>
                   <input type="text" class="form-control" name="username" value=<?php echo $result['username']?> required>
@@ -162,7 +160,7 @@ $result = mysqli_fetch_assoc($data);
   <script src="../assets/js/pcoded.js"></script>
   <script src="../assets/js/plugins/feather.min.js"></script>
 
-  
+    
   
   
   
@@ -314,14 +312,7 @@ $result = mysqli_fetch_assoc($data);
           <div class="collapse show" id="pctcustcollapse4">
             <div class="pct-content">
               <div class="theme-color themepreset-color boxwidthpreset theme-container">
-                <a href="#!" class="active" onclick="change_box_container('false')" data-value="false"><span><img src="https://themewagon.github.io/Mantis-Bootstrap/assets/images/customization/default.svg" alt="img"></span><span>Fluid</span></a>
-                <a href="#!" class="" onclick="change_box_container('true')" data-value="true"><span><img src="https://themewagon.github.io/Mantis-Bootstrap/assets/images/customization/container.svg" alt="img"></span><span>Container</span></a>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <a class="btn border-0 text-start w-100" data-bs-toggle="collapse" href="#pctcustcollapse5">
+                <a href="#!" class="active" onclick="change_box_container('false')" data-value="fals    
             <div class="d-flex align-items-center">
               <div class="flex-shrink-0">
                 <div class="avtar avtar-xs bg-light-primary">
@@ -359,7 +350,7 @@ $result = mysqli_fetch_assoc($data);
       </ul>
       
     </div>
-  </div>
+  </div>                             
 </div>
 </body>
 <!-- [Body] end -->
@@ -386,7 +377,7 @@ if(isset($_POST['update']))
 
  if (strlen($username) < 3) {
   die("Username must be at least 3 characters long.</p>");
-}
+}      
 
 if (strlen($phone_no) != 10) {
   die("Enter valid phone number");
@@ -404,7 +395,7 @@ if (strlen($phone_no) != 10) {
  {  
 
       ?>
-     <!-- auto refresh..with  content second 3 second anmd directly display to link -->
+     <!-- auto refresh..with  content second 3 second anmd directly display to link -->                                                                            
      <meta http-equiv = "refresh" content = "0; url =            
         http://localhost:800/allfiles/Mantis-Bootstrap/Mantis-Bootstrap/dashboard/index.php"/>
 

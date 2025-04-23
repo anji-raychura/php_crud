@@ -1,0 +1,31 @@
+
+Knowing the file system helps you customize, fix, build, and control your site
+
+1. Customization
+To change the design or layout, you need to know where theme files are.
+
+Example: Want to edit the homepage? Go to wp-content/themes/your-theme/front-page.php
+-----------------------------------------------
+
+2. Fixing Errors
+If your site breaks, knowing the file structure helps you find the problem fast.
+
+Example: Turn on debugging in wp-config.php
+-----------------------------------------------
+
+3. Security
+You’ll know which files to back up or protect.
+
+Example: Keep wp-content/uploads/ safe — it has all your images.
+-----------------------------------------------
+
+4. Build Your Own Stuff
+If you're making themes or plugins, you need to know where to put your code.
+
+Example: Custom plugin? Add it inside wp-content/plugins/
+-----------------------------------------------
+
+5. Better Control
+You can speed up your site, clean it, and manage it better.
+
+Example: Edit .htaccess for performance or SEO.
